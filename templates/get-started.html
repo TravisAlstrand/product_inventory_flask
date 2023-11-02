@@ -1,0 +1,27 @@
+{% extends "layout.html" %} {% block content %}
+<section>
+  <h2>Let's Do This!</h2>
+  <form>
+    <div class="label-input-div">
+      <label for="mainSelect1">Brands or Products?</label>
+      <select id="mainSelect1">
+        <option selected disabled hidden value="">Select an Option</option>
+        <option value="brands">Brands</option>
+        <option value="products">Products</option>
+      </select>
+    </div>
+    <div id="serviceSelect" class="label-input-div service-select">
+      <label for="mainSelect2">Okie Dokes, What Now?</label>
+      <select id="mainSelect2">
+        <option selected disabled hidden value="">Select an Option</option>
+        <option value="browse">Browse</option>
+        <option value="search">Search</option>
+        <option value="create">Create New</option>
+      </select>
+    </div>
+    <button type="submit" id="startSubmitBtn" class="btn submit-btn">
+      Submit
+    </button>
+  </form>
+</section>
+{% endblock %}

@@ -61,4 +61,14 @@ a {
   text-decoration: none;
 }
 
-/* HERO */
+/* GET STARTED PAGE */
+
+.label-input-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.submit-btn,
+.service-select {
+  display: none;
+}

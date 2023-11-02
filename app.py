@@ -9,31 +9,9 @@ from modules.csv_to_db import add_csv_to_db
 def index():
   return render_template("index.html")
 
-# PRODUCTS
-@app.route("/browse-products")
-def browse_products():
-  return render_template("browse-prods.html")
-
-@app.route("/search-products")
-def search_products():
-  return render_template("search-prods.html")
-
-@app.route("/add-product")
-def add_product():
-  return render_template("add-prod.html")
-
-# BRANDS
-@app.route("/browse-brands")
-def browse_brands():
-  return render_template("browse-brands.html")
-
-@app.route("/search-brands")
-def search_brands():
-  return render_template("search-brands.html")
-
-@app.route("/add-brand")
-def add_brand():
-  return render_template("add-brand.html")
+@app.route("/get-started")
+def get_started():
+  return render_template("get-started.html")
 
 # 404
 @app.errorhandler(404)
