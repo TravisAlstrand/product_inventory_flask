@@ -1,3 +1,37 @@
 {% extends "layout.html" %} {% block content %}
-<h1>Yo!</h1>
+<section class="hero-container">
+  <h1>Welcome to S.M.E.A.G.L.E.!</h1>
+  <p>The world's greatest product inventory management system ever created!</p>
+  <p>(Don't Google it, just trust me here...)</p>
+</section>
+<section class="services-container">
+  <h2>What would you like to do?</h2>
+  <p>
+    (S.M.E.A.G.L.E. isn't psychic! To edit or delete an existing product /
+    brand, search for it first)
+  </p>
+  <h3>Product Services</h3>
+  <ul>
+    <li><a href="{{ url_for('browse_products') }}">Browse Products</a></li>
+    <li>
+      <a href="{{ url_for('search_products') }}">Search for a Product</a>
+    </li>
+    <li><a href="{{ url_for('add_product') }}">Add a New Product</a></li>
+  </ul>
+  <h3>Brand Services</h3>
+  <ul>
+    <li><a href="{{ url_for('browse_brands') }}">Browse Brands</a></li>
+    <li><a href="{{ url_for('search_brands') }}">Search for a Brand</a></li>
+    <li><a href="{{ url_for('add_brand') }}">Add a New Brand</a></li>
+  </ul>
+  <h3>Other Services</h3>
+  <ul>
+    <li>
+      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+        See top Google Results for "Greatest Product Inventory Management System
+        Ever Created"
+      </a>
+    </li>
+  </ul>
+</section>
 {% endblock %}
