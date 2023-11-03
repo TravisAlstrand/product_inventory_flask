@@ -2,8 +2,12 @@ from modules.models import db, Product, Brand
 
 
 def handle_search(table, query):
-  table = get_table(table)
   results = []
+
+  if table == "Products":
+    table = Product
+  elif table == "Brands":
+    table = Brand
 
   for item in db.session.query(table):
     if table == Product:
@@ -15,8 +19,12 @@ def handle_search(table, query):
   return results
 
 
-def get_table(string):
-    if string == "Products":
-      return Product
-    elif string == "Brands":
-      return Brand
+def get_single_product(name):
+    return db.session.query(Product).filter(Product.product_name == name).one_or_none()
+
+def get_single_brand(name):
+    brand = db.session.query(Brand).filter(Brand.brand_name == name).one_or_none()
+    print(brand.brand_id)
+    if brand:
+      count = db.session.query(Product).filter(Product.brand_id == brand.brand_id).all()
+    return [brand, len(count)]

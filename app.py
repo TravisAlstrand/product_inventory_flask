@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, url_for
 from os.path import exists
 from modules.models import db, app
 from modules.csv_to_db import add_csv_to_db
-from modules.handle_search import handle_search
+from modules.handle_search import handle_search, get_single_product, get_single_brand
 
 
 # HOME
@@ -21,7 +21,7 @@ def get_started():
   return render_template("get-started.html")
 
 # SEARCH PAGE
-@app.route("/search-<service>", methods=["GET", "POST"])
+@app.route("/search/<service>", methods=["GET", "POST"])
 def search_page(service=None):
   search_query = None
   results = None
@@ -29,6 +29,18 @@ def search_page(service=None):
     search_query = request.form["search"]
     results = handle_search(service.capitalize(), search_query.lower())
   return render_template("search.html", service=service, query=search_query, results=results)
+
+# PRODUCT DETAIL PAGE
+@app.route("/product/<result>")
+def product_detail(result):
+  result = get_single_product(result)
+  return render_template("prod-detail.html", product=result)
+
+# BRAND DETAIL PAGE
+@app.route("/brand/<result>")
+def brand_detail(result):
+  brand_count = get_single_brand(result)
+  return render_template("brand-detail.html", brand=brand_count[0], count=brand_count[1])
 
 # 404
 @app.errorhandler(404)

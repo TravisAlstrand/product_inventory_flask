@@ -31,9 +31,9 @@
   {% else %}
     {% for result in results %}
       {% if service == "products" %}
-        <p>{{result.product_name}}</p>
+      <a href="{{ url_for('product_detail', result=result.product_name) }}">{{result.product_name}}</a>
       {% elif service == "brands" %}
-        <p>{{result.brand_name}}</p>
+          <a href="{{ url_for('brand_detail', result=result) }}">{{result.brand_name}}</a>
         {% endif %}
     {% endfor %}
   {% endif %}

@@ -1,0 +1,11 @@
+{% extends "layout.html" %} {% block content %}
+<section class="detail-container">
+  {% if brand %}
+  <h2>{{ brand.brand_name }}</h2>
+  <p>{{ count }}</p>
+  {% else %}
+  <h2>Oops! There was an issue, try again.</h2>
+  <a href="{{ url_for('search_page', 'brands')}}" class="btn">Search Brands</a>
+  {% endif %}
+</section>
+{% endblock %}

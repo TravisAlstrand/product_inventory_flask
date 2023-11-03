@@ -1,0 +1,21 @@
+{% extends "layout.html" %} {% block content %}
+<section class="detail-container">
+  {% if product %}
+  <h2>{{product.product_name}}</h2>
+  <p>
+    Brand:
+    <a href="{{ url_for('brand_detail', result=product.brand.brand_name) }}"
+      >{{product.brand.brand_name}}</a
+    >
+  </p>
+  <p>Price: ${{product.product_price / 100}}</p>
+  <p>Quantity: {{product.product_quantity}}</p>
+  <p>Last Updated: {{product.date_updated}}</p>
+  {% else %}
+  <h2>Oops! There was an issue, try again.</h2>
+  <a href="{{ url_for('search_page', 'products')}}" class="btn"
+    >Search Products</a
+  >
+  {% endif %}
+</section>
+{% endblock %}
