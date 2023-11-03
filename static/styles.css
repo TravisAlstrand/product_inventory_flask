@@ -5,70 +5,11 @@
 }
 
 :root {
-  --bg-color: #040d12;
-  --color-dark: #183d3d;
-  --color-primary: #5c8374;
-  --color-light: #93b1a6;
-  --color-secondary: #83745c;
-  --color-third: #745c83;
-
   font-family: "Inter", sans-serif;
   text-align: center;
 }
 
-/* DRY */
-
-h1,
-h2 {
-  font-family: "Abril Fatface", serif;
-  font-weight: 400;
-}
-
-/* BASE STYLES */
-
-body {
-  background-color: var(--color-secondary);
-}
-
-main {
-  margin-inline: 0.5rem;
-  padding: 2rem 1rem;
-  min-height: 100vh;
-  height: 100%;
-  color: var(--color-primary);
-  background-color: var(--bg-color);
-}
-
-header {
-  background-color: var(--color-secondary);
-}
-
-h1 {
-  padding-block: 1.25rem;
-  font-size: 2.5rem;
-  color: var(--bg-color);
-}
-
-h2 {
-  color: var(--color-secondary);
-}
-
-li {
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-/* GET STARTED PAGE */
-
-.label-input-div {
-  display: flex;
-  flex-direction: column;
-}
-
-.submit-btn,
-.service-select {
+.service-select,
+.submit-btn {
   display: none;
 }

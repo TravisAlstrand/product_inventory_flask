@@ -1,18 +1,26 @@
 {% extends "layout.html" %} {% block content %}
-<section>
+<section class="get-started-container">
   <h2>Let's Do This!</h2>
-  <form>
+  <p>
+    To edit or delete an item, you'll have to search for it, S.M.E.A.G.L.E's not
+    psychic... yet.
+  </p>
+  <form
+    action="{{ url_for('get_started') }}"
+    method="POST"
+    class="get-started-form"
+  >
     <div class="label-input-div">
       <label for="mainSelect1">Brands or Products?</label>
-      <select id="mainSelect1">
+      <select id="mainSelect1" name="b_or_p">
         <option selected disabled hidden value="">Select an Option</option>
         <option value="brands">Brands</option>
         <option value="products">Products</option>
       </select>
     </div>
     <div id="serviceSelect" class="label-input-div service-select">
-      <label for="mainSelect2">Okie Dokes, What Now?</label>
-      <select id="mainSelect2">
+      <label for="mainSelect2">Uggh, then what?</label>
+      <select id="mainSelect2" name="service">
         <option selected disabled hidden value="">Select an Option</option>
         <option value="browse">Browse</option>
         <option value="search">Search</option>

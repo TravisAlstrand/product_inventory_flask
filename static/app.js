@@ -1,6 +1,6 @@
 const mainSelect1 = document.querySelector("#mainSelect1");
 const select2Div = document.querySelector("#serviceSelect");
-const mainSelect2 = select2Div.querySelector("#mainSelect2");
+const mainSelect2 = document.querySelector("#mainSelect2");
 const startSubmitBtn = document.querySelector("#startSubmitBtn");
 
 if (mainSelect1) {

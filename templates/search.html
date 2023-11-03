@@ -1,0 +1,42 @@
+{% extends "layout.html" %} {% block content %}
+<section class="search-page-container">
+  {% if service and service == "products" or service == "brands" %}
+  <h2>{{ service.capitalize() }} Search</h1>
+  {% else %}
+  <h2>Looks like you missed a step!</h2>
+  {% endif %}
+  <a href="{{ url_for('get_started')}}" class="btn">Go Back</a>
+  {% if service and service == "products" or service == "brands" %}
+  <form
+    action="{{ url_for('search_page', service=service) }}"
+    method="POST"
+    class="search-form"
+  >
+    <div class="label-input-div">
+      {% if service == "products" %}
+      <label for="searchInput">Search by Product Name</label>
+      {% elif service == "brands" %}
+      <label for="searchInput">Search by Brand Name</label>
+      {% endif %}
+      <input type="search" name="search" id="searchInput" />
+    </div>
+  </form>
+  {% endif %}
+</section>
+{% if query %}
+<section>
+  <h2>Results for {{ query }}</h2>
+  {% if not results %}
+    <p>Oops! No results found, try again!</p>
+  {% else %}
+    {% for result in results %}
+      {% if service == "products" %}
+        <p>{{result.product_name}}</p>
+      {% elif service == "brands" %}
+        <p>{{result.brand_name}}</p>
+        {% endif %}
+    {% endfor %}
+  {% endif %}
+</section>
+{% endif %}
+{% endblock %}
