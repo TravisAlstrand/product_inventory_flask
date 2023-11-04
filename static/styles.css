@@ -9,6 +9,14 @@
   text-align: center;
 }
 
+a {
+  color: blue;
+}
+
+a:visited {
+  color: blue;
+}
+
 .category-select,
 .submit-btn {
   display: none;
