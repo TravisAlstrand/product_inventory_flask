@@ -1,5 +1,5 @@
 const mainSelect1 = document.querySelector("#mainSelect1");
-const select2Div = document.querySelector("#serviceSelect");
+const select2Div = document.querySelector("#categorySelect");
 const mainSelect2 = document.querySelector("#mainSelect2");
 const startSubmitBtn = document.querySelector("#startSubmitBtn");
 

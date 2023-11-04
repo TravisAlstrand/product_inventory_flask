@@ -3,12 +3,17 @@
   {% if brand %}
   <h2>{{ brand.brand_name }}</h2>
   <p>{{ count }}</p>
-  <a href="#" class="btn">Edit Brand</a>
+  <a
+    href="{{ url_for('edit_page', category=category, item=brand.brand_name)}}"
+    class="btn"
+  >
+    Edit Brand
+  </a>
   <a href="#" class="btn">Delete Brand</a>
   {% else %}
   <h2>Oops! There was an issue, try again.</h2>
   {% endif %}
-  <a href="{{ url_for('search_page', service='brands')}}" class="btn">
+  <a href="{{ url_for('search_page', category='brands')}}" class="btn">
     Search Brands
   </a>
 </section>

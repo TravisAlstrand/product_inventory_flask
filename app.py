@@ -16,20 +16,20 @@ def index():
 def get_started():
   if request.form:
     print(request.form["b_or_p"])
-    print(request.form["service"])
-    if request.form["service"] == "search":
-      return redirect(url_for("search_page", service=request.form["b_or_p"]))
+    print(request.form["category"])
+    if request.form["category"] == "search":
+      return redirect(url_for("search_page", category=request.form["b_or_p"]))
   return render_template("get-started.html")
 
 
 # SEARCH PAGE
-@app.route("/search/<service>", methods=["GET", "POST"])
-def search_page(service=None, results=None):
+@app.route("/search/<category>", methods=["GET", "POST"])
+def search_page(category=None, results=None):
   search_query = None
   if request.form:
     search_query = request.form["search"]
-    results = handle_search(service.capitalize(), search_query.lower())
-  return render_template("search.html", service=service, query=search_query, results=results)
+    results = handle_search(category.capitalize(), search_query.lower())
+  return render_template("search.html", category=category, query=search_query, results=results)
 
 
 # PRODUCT DETAIL PAGE
@@ -45,6 +45,12 @@ def brand_detail(result):
   brand_count = get_single_brand(result)
   return render_template("brand-detail.html", brand=brand_count[0], count=brand_count[1])
 
+
+# EDIT PAGE
+@app.route("/edit/<item>")
+def edit_page(item):
+  print(item)
+  return render_template("edit.html", item=item)
 
 # 404
 @app.errorhandler(404)
