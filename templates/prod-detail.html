@@ -11,7 +11,12 @@
   <p>Price: ${{product.product_price / 100}}</p>
   <p>Quantity: {{product.product_quantity}}</p>
   <p>Last Updated: {{product.date_updated}}</p>
-  <a href="#" class="btn"> Edit Product </a>
+  <a
+    href="{{ url_for('edit_page', category='product', item=product.product_name) }}"
+    class="btn"
+  >
+    Edit Product
+  </a>
   <a href="#" class="btn"> Delete Product </a>
   {% else %}
   <h2>Oops! There was an issue, try again.</h2>

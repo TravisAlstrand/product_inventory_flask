@@ -47,10 +47,22 @@ def brand_detail(result):
 
 
 # EDIT PAGE
-@app.route("/edit/<item>")
-def edit_page(item):
-  print(item)
-  return render_template("edit.html", item=item)
+@app.route("/<category>/edit/<item>", methods=["GET", "POST"])
+def edit_page(category, item):
+  if request.form and category == "brand":
+    print(request.form["brand_name"])
+    return redirect(url_for("brand_detail", result=item))
+  elif request.form and category == "product":
+    print(request.form["product_name"])
+    print(request.form["product_price"])
+    print(request.form["product_quantity"])
+    return redirect(url_for("product_detail", result=item))
+  if category == "brand":
+    item = get_single_brand(item)
+    return render_template("edit.html", category=category, item=item[0])
+  else:
+    item = get_single_product(item)
+    return render_template("edit.html", category=category, item=item)
 
 # 404
 @app.errorhandler(404)
