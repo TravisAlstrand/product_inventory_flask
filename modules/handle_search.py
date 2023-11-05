@@ -20,11 +20,14 @@ def handle_search(table, query):
 
 
 def get_single_product(name):
-    return db.session.query(Product).filter(Product.product_name == name).one_or_none()
+  return db.session.query(Product).filter(Product.product_name == name).one_or_none()
+
 
 def get_single_brand(name):
-    brand = db.session.query(Brand).filter(Brand.brand_name == name).one_or_none()
-    print(brand.brand_id)
-    if brand:
-      count = db.session.query(Product).filter(Product.brand_id == brand.brand_id).all()
-    return [brand, len(count)]
+  return db.session.query(Brand).filter(Brand.brand_name == name).one_or_none()
+
+
+def get_brand_product_count(name):
+  brand = db.session.query(Brand).filter(Brand.brand_name == name).one_or_none()
+  count = db.session.query(Product).filter(Product.brand_id == brand.brand_id).all()
+  return len(count)

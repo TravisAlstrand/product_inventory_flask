@@ -18,6 +18,11 @@ a:visited {
 }
 
 .category-select,
-.submit-btn {
+.submit-btn,
+.error-msg {
   display: none;
+}
+
+.error-msg {
+  color: red;
 }

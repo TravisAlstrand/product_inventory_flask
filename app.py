@@ -2,8 +2,8 @@ from flask import render_template, request, redirect, url_for
 from os.path import exists
 from modules.models import db, app
 from modules.csv_to_db import add_csv_to_db
-from modules.handle_search import handle_search, get_single_product, get_single_brand
-
+from modules.handle_search import handle_search, get_single_product, get_single_brand, get_brand_product_count
+from modules.site_to_db import updateBrand
 
 # HOME
 @app.route("/")
@@ -15,8 +15,6 @@ def index():
 @app.route("/get-started", methods=["GET", "POST"])
 def get_started():
   if request.form:
-    print(request.form["b_or_p"])
-    print(request.form["category"])
     if request.form["category"] == "search":
       return redirect(url_for("search_page", category=request.form["b_or_p"]))
   return render_template("get-started.html")
@@ -42,16 +40,20 @@ def product_detail(result):
 # BRAND DETAIL PAGE
 @app.route("/brand/<result>")
 def brand_detail(result):
-  brand_count = get_single_brand(result)
-  return render_template("brand-detail.html", brand=brand_count[0], count=brand_count[1])
+  brand = get_single_brand(result)
+  count = get_brand_product_count(result)
+  return render_template("brand-detail.html", brand=brand, count=count)
 
 
 # EDIT PAGE
 @app.route("/<category>/edit/<item>", methods=["GET", "POST"])
 def edit_page(category, item):
   if request.form and category == "brand":
-    print(request.form["brand_name"])
-    return redirect(url_for("brand_detail", result=item))
+    brand_edit_message = updateBrand(item, request.form["brand_name"])
+    if brand_edit_message == "success":
+      return redirect(url_for("brand_detail", result=request.form["brand_name"]))
+    else:
+      return redirect(url_for('duplicate_error_page', category=category, item=item))
   elif request.form and category == "product":
     print(request.form["product_name"])
     print(request.form["product_price"])
@@ -59,10 +61,15 @@ def edit_page(category, item):
     return redirect(url_for("product_detail", result=item))
   if category == "brand":
     item = get_single_brand(item)
-    return render_template("edit.html", category=category, item=item[0])
+    return render_template("edit.html", category=category, item=item)
   else:
     item = get_single_product(item)
     return render_template("edit.html", category=category, item=item)
+  
+@app.route("/error/<category>/<item>")
+def duplicate_error_page(category, item):
+  return render_template("dupe-error.html", category=category, item=item)
+
 
 # 404
 @app.errorhandler(404)

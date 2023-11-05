@@ -5,6 +5,7 @@
   <form
     action="{{ url_for('edit_page', category=category, item=item.brand_name) }}"
     method="POST"
+    id="brandEditForm"
     class="edit-form"
   >
     <div class="label-input-div">
@@ -12,17 +13,30 @@
       <input
         type="text"
         name="brand_name"
-        id="nameInput"
+        id="brandNameInput"
         value="{{ item.brand_name }}"
       />
+      <p class="error-msg">Name Cannot Be Blank!</p>
     </div>
-    <button type="submit">Submit</button>
+    {% if error %}
+    <p class="error-msg">{{ error }}!</p>
+    {% endif %}
+    <div class="submit-cancel-div">
+      <button type="submit">Submit</button>
+      <a
+        href="{{ url_for('brand_detail', result=item.brand_name) }}"
+        class="btn"
+      >
+        Cancel
+      </a>
+    </div>
   </form>
   {% else %}
   <h2>Edit {{item.product_name}}</h2>
   <form
     action="{{ url_for('edit_page', category=category, item=item.product_name) }}"
     method="POST"
+    id="productEditForm"
     class="edit-form"
   >
     <div class="label-input-div">
@@ -30,9 +44,10 @@
       <input
         type="text"
         name="product_name"
-        id="nameInput"
+        id="productNameInput"
         value="{{ item.product_name }}"
       />
+      <p class="error-msg">Name Cannot Be Blank!</p>
     </div>
     <div class="label-input-div">
       <label for="priceInput">Edit Product Price (cents)</label>
@@ -42,6 +57,7 @@
         id="priceInput"
         value="{{ item.product_price }}"
       />
+      <p class="error-msg">Field Cannot Be Blank!</p>
     </div>
     <div class="label-input-div">
       <label for="quantityInput">Edit Product Quantity</label>
@@ -51,8 +67,17 @@
         id="quantityInput"
         value="{{ item.product_quantity }}"
       />
+      <p class="error-msg">Field Cannot Be Blank!</p>
     </div>
-    <button type="submit">Submit</button>
+    <div class="submit-cancel-div">
+      <button type="submit">Submit</button>
+      <a
+        href="{{ url_for('product_detail', result=item.product_name) }}"
+        class="btn"
+      >
+        Cancel
+      </a>
+    </div>
   </form>
   {% endif %}
 </section>

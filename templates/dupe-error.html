@@ -1,0 +1,21 @@
+{% extends "layout.html" %} {% block content %}
+<section>
+  <h2>OOPS!</h2>
+  <p>A {{ category }} already exists with the name "{{ item }}"!</p>
+  <a
+    href="{{ url_for('edit_page', category=category, item=item) }}"
+    class="btn"
+  >
+    Go Back
+  </a>
+  {% if category == "brand" %}
+  <a href="{{ url_for('search_page', category='brands') }}" class="btn">
+    Brand Search
+  </a>
+  {% else %}
+  <a href="{{ url_for('search_page', category='products') }}" class="btn">
+    Product Search
+  </a>
+  {% endif %}
+</section>
+{% endblock %}
