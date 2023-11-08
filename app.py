@@ -69,6 +69,13 @@ def edit_page(category, item):
     item = get_single_product(item)
     return render_template("edit.html", category=category, item=item)
   
+
+@app.route("/<category>/create_new", methods=["GET", "POST"])
+def create_new_page(category):
+  return render_template("create-new.html", category=category)
+
+  
+# ALREADY EXISTS ERROR PAGE 
 @app.route("/error/<category>/<item>/<new_name>")
 def duplicate_error_page(category, item, new_name):
   return render_template("dupe-error.html", category=category, item=item, new_name=new_name)

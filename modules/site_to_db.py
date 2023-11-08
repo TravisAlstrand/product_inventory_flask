@@ -2,6 +2,7 @@ import datetime
 from modules.handle_search import get_single_brand, get_single_product, handle_search
 from modules.models import db, Product, Brand
 
+
 def updateBrand(original, new_name):
   brand = get_single_brand(original)
   if brand:
@@ -16,6 +17,7 @@ def updateBrand(original, new_name):
   else:
     return "Sorry there was an error!"
   
+
 def updateProduct(original, form_data):
   new_name = form_data["product_name"]
   product = get_single_product(original)
@@ -32,3 +34,8 @@ def updateProduct(original, form_data):
       return f"There is already a Product with the name {new_name}, try again!"
   else:
     return "Sorry there was an error!"
+
+
+def create_new(category, form_data):
+  print(category)
+  print(form_data)

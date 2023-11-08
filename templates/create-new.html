@@ -1,0 +1,67 @@
+{% extends "layout.html" %} {% block content %}
+<section>
+  {% if category == "Brand" %}
+  <h2>New Brand</h2>
+  <form
+    action="{{ url_for('create_new_page', category=category) }}"
+    method="POST"
+    id="newBrandForm"
+    class="new-brand-form"
+  >
+    <div class="label-input-div">
+      <label for="newBrandNameInput">Brand Name</label>
+      <input type="text" name="brand_name" id="newBrandNameInput" />
+      <p class="error-msg">Name Cannot Be Blank!</p>
+    </div>
+  {% else %}
+  <h2>New Product</h2>
+  <form
+    action="{{ url_for('create_new_page', category=category) }}"
+    method="POST"
+    id="newProductForm"
+    class="new-product-form"
+  >
+    <div class="label-input-div">
+      <label for="newProdNameInput">Product Name</label>
+      <input
+        type="text"
+        name="product_name"
+        id="newProdNameInput"
+      />
+      <p class="error-msg">Name Cannot Be Blank!</p>
+    </div>
+    <div class="label-input-div">
+      <label for="newProdBrand">Brand Name</label>
+      <input
+        type="text"
+        name="brand_name"
+        id="newProdBrand"
+      />
+      <p class="error-msg">Name Cannot Be Blank!</p>
+    </div>
+    <div class="label-input-div">
+      <label for="newPriceInput">Product Price (cents)</label>
+      <input
+        type="text"
+        name="product_price"
+        id="newPriceInput"
+      />
+      <p class="error-msg">Field Cannot Be Blank!</p>
+    </div>
+    <div class="label-input-div">
+      <label for="newQuantityInput">Product Quantity</label>
+      <input
+        type="text"
+        name="product_quantity"
+        id="newQuantityInput"
+      />
+      <p class="error-msg">Field Cannot Be Blank!</p>
+    </div>
+    {% endif %}
+    <div class="submit-cancel-div">
+      <button type="submit">Submit</button>
+      <a href="{{ url_for('get_started') }}" class="btn"> Cancel </a>
+    </div>
+  </form>
+</section>
+{% endblock %}
