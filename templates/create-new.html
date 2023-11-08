@@ -1,6 +1,6 @@
 {% extends "layout.html" %} {% block content %}
 <section>
-  {% if category == "Brand" %}
+  {% if category == "brand" %}
   <h2>New Brand</h2>
   <form
     action="{{ url_for('create_new_page', category=category) }}"
@@ -31,13 +31,17 @@
       <p class="error-msg">Name Cannot Be Blank!</p>
     </div>
     <div class="label-input-div">
-      <label for="newProdBrand">Brand Name</label>
-      <input
-        type="text"
+      <label for="brandSelect">Brand</label>
+      <select
         name="brand_name"
-        id="newProdBrand"
-      />
-      <p class="error-msg">Name Cannot Be Blank!</p>
+        id="brandSelect"
+      >
+        <option value="default" hidden disabled selected>Choose a Brand</option>
+        {% for brand in brands %}
+        <option value="{{ brand.brand_name }}">{{ brand.brand_name }}</option>
+        {% endfor %}
+      </select>
+      <p class="error-msg">Please Choose a Brand!</p>
     </div>
     <div class="label-input-div">
       <label for="newPriceInput">Product Price (cents)</label>

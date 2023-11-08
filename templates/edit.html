@@ -40,7 +40,7 @@
     class="edit-form"
   >
     <div class="label-input-div">
-      <label for="nameInput">Edit Product Name</label>
+      <label for="productNameInput">Edit Product Name</label>
       <input
         type="text"
         name="product_name"
@@ -48,6 +48,18 @@
         value="{{ item.product_name }}"
       />
       <p class="error-msg">Name Cannot Be Blank!</p>
+    </div>
+    <div class="label-input-div">
+      <label for="brandSelect">Change Brand</label>
+      <select
+        name="brand_name"
+        id="brandSelect"
+        value="{{ item.brand.brand_name }}"
+      >
+        {% for brand in brands %}
+        <option value="{{ brand.brand_name }}">{{ brand.brand_name }}</option>
+        {% endfor %}
+      </select>
     </div>
     <div class="label-input-div">
       <label for="priceInput">Edit Product Price (cents)</label>

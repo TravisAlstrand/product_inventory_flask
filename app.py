@@ -2,8 +2,8 @@ from flask import render_template, request, redirect, url_for
 from os.path import exists
 from modules.models import db, app
 from modules.csv_to_db import add_csv_to_db
-from modules.handle_search import handle_search, get_single_product, get_single_brand, get_brand_product_count
-from modules.site_to_db import updateBrand, updateProduct
+from modules.handle_search import handle_search, get_single_product, get_single_brand, get_brand_product_count, get_all_brands
+from modules.site_to_db import updateBrand, updateProduct, create_new
 
 # HOME
 @app.route("/")
@@ -17,11 +17,13 @@ def get_started():
   if request.form:
     if request.form["category"] == "search":
       return redirect(url_for("search_page", category=request.form["b_or_p"]))
+    elif request.form["category"] == "create":
+      return redirect(url_for("create_new_page", category=request.form["b_or_p"]))
   return render_template("get-started.html")
 
 
 # SEARCH PAGE
-@app.route("/search/<category>", methods=["GET", "POST"])
+@app.route("/<category>/search", methods=["GET", "POST"])
 def search_page(category=None, results=None):
   search_query = None
   if request.form:
@@ -67,18 +69,35 @@ def edit_page(category, item):
     return render_template("edit.html", category=category, item=item)
   else:
     item = get_single_product(item)
-    return render_template("edit.html", category=category, item=item)
+    all_brands = get_all_brands()
+    return render_template("edit.html", category=category, item=item, brands=all_brands)
   
 
-@app.route("/<category>/create_new", methods=["GET", "POST"])
+# CREATE NEW PAGE
+@app.route("/<category>/create-new", methods=["GET", "POST"])
 def create_new_page(category):
-  return render_template("create-new.html", category=category)
+
+  new_cat = category.replace("s", "")
+  if request.form:
+    new_item_message = create_new(new_cat, request.form)
+    if new_item_message == "success":
+      return redirect(url_for(f"{new_cat}_detail", result=request.form[f"{new_cat}_name"]))
+    else:
+      return redirect(url_for("dupe_new_error_page", category=category, new_name=request.form[f"{new_cat}_name"]))
+
+  all_brands = get_all_brands()
+  return render_template("create-new.html", category=new_cat, brands=all_brands)
 
   
-# ALREADY EXISTS ERROR PAGE 
+# ALREADY EXISTS ERROR PAGE EDIT
 @app.route("/error/<category>/<item>/<new_name>")
 def duplicate_error_page(category, item, new_name):
   return render_template("dupe-error.html", category=category, item=item, new_name=new_name)
+
+@app.route("/error/<category>/<new_name>")
+def dupe_new_error_page(category, new_name):
+  plural = f"{category}s"
+  return render_template("new-dupe-error.html", cat_single=category, cat_plural=plural, name=new_name)
 
 
 # 404
