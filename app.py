@@ -3,7 +3,7 @@ from os.path import exists
 from modules.models import db, app
 from modules.csv_to_db import add_csv_to_db
 from modules.handle_search import handle_search, get_single_product, get_single_brand, get_brand_product_count
-from modules.site_to_db import updateBrand
+from modules.site_to_db import updateBrand, updateProduct
 
 # HOME
 @app.route("/")
@@ -48,17 +48,20 @@ def brand_detail(result):
 # EDIT PAGE
 @app.route("/<category>/edit/<item>", methods=["GET", "POST"])
 def edit_page(category, item):
+  # IF SUBMITTING EDITS
   if request.form and category == "brand":
     brand_edit_message = updateBrand(item, request.form["brand_name"])
     if brand_edit_message == "success":
       return redirect(url_for("brand_detail", result=request.form["brand_name"]))
     else:
-      return redirect(url_for('duplicate_error_page', category=category, item=item))
+      return redirect(url_for('duplicate_error_page', category=category, item=item, new_name=request.form["brand_name"]))
   elif request.form and category == "product":
-    print(request.form["product_name"])
-    print(request.form["product_price"])
-    print(request.form["product_quantity"])
-    return redirect(url_for("product_detail", result=item))
+    product_edit_message = updateProduct(item, request.form)
+    if product_edit_message == "success":
+      return redirect(url_for("product_detail", result=request.form["product_name"]))
+    else:
+      return redirect(url_for('duplicate_error_page', category=category, item=item, new_name=request.form["product_name"]))
+  # IF REQUESTING PAGE
   if category == "brand":
     item = get_single_brand(item)
     return render_template("edit.html", category=category, item=item)
@@ -66,9 +69,9 @@ def edit_page(category, item):
     item = get_single_product(item)
     return render_template("edit.html", category=category, item=item)
   
-@app.route("/error/<category>/<item>")
-def duplicate_error_page(category, item):
-  return render_template("dupe-error.html", category=category, item=item)
+@app.route("/error/<category>/<item>/<new_name>")
+def duplicate_error_page(category, item, new_name):
+  return render_template("dupe-error.html", category=category, item=item, new_name=new_name)
 
 
 # 404

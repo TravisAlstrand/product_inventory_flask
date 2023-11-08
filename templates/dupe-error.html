@@ -1,7 +1,7 @@
 {% extends "layout.html" %} {% block content %}
 <section>
   <h2>OOPS!</h2>
-  <p>A {{ category }} already exists with the name "{{ item }}"!</p>
+  <p>A {{ category }} already exists with the name "{{ new_name }}"!</p>
   <a
     href="{{ url_for('edit_page', category=category, item=item) }}"
     class="btn"

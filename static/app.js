@@ -48,9 +48,9 @@ const prodEditForm = document.querySelector("#productEditForm");
 const prodNameInput = document.querySelector("#productNameInput");
 const priceInput = document.querySelector("#priceInput");
 const quantityInput = document.querySelector("#quantityInput");
-let prodNameIsValid,
-  priceIsValid,
-  quantityIsValid = true;
+let prodNameIsValid = true;
+let priceIsValid = true;
+let quantityIsValid = true;
 
 if (prodEditForm) {
   prodNameInput.addEventListener("input", (e) => {
