@@ -50,4 +50,17 @@ def create_new(category, form_data):
       return "success"
     else:
       return f"There is already a Brand with the name {form_data['brand_name']}, try again!"
+  else:
+    product_already_exists = check_if_exists("Products", form_data["product_name"].lower())
+    if len(product_already_exists) == 0:
+      new_brand = get_single_brand(form_data["brand_name"])
+      new_brand_id = new_brand.brand_id
+      new_product = Product(product_name=form_data["product_name"], product_price=form_data["product_price"],
+                            product_quantity=form_data["product_quantity"], date_updated=datetime.date.today(),
+                            brand_id=new_brand_id)
+      db.session.add(new_product)
+      db.session.commit()
+      return "success"
+    else:
+      return f"There is already a Product with the name {form_data['product_name']}, try again!"
 

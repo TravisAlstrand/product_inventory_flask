@@ -94,6 +94,7 @@ def create_new_page(category):
 def duplicate_error_page(category, item, new_name):
   return render_template("dupe-error.html", category=category, item=item, new_name=new_name)
 
+# ALREADY EXISTS ERROR PAGE NEW
 @app.route("/error/<category>/<new_name>")
 def dupe_new_error_page(category, new_name):
   plural = f"{category}s"

@@ -72,6 +72,70 @@ if (prodEditForm) {
   });
 }
 
+// NEW BRAND
+const newBrandForm = document.querySelector("#newBrandForm");
+const newBrandNameInput = document.querySelector("#newBrandNameInput");
+let newBrandIsValid = false;
+if (newBrandForm) {
+  newBrandNameInput.addEventListener("input", (e) => {
+    newBrandIsValid = checkNameField(e.target);
+  });
+
+  newBrandForm.addEventListener("submit", (e) => {
+    if (!newBrandIsValid) {
+      checkNameField(newBrandNameInput);
+      e.preventDefault();
+    }
+  });
+}
+
+// NEW PRODUCT
+const newProductForm = document.querySelector("#newProductForm");
+const newProdNameInput = document.querySelector("#newProdNameInput");
+const brandSelect = document.querySelector("#brandSelect");
+const newPriceInput = document.querySelector("#newPriceInput");
+const newQuantityInput = document.querySelector("#newQuantityInput");
+let newProdNameValid = false;
+let newProdBrandValid = false;
+let newProdPriceValid = false;
+let newProdQuantityValid = false;
+
+if (newProductForm) {
+  newProdNameInput.addEventListener("input", (e) => {
+    newProdNameValid = checkNameField(e.target);
+  });
+
+  newPriceInput.addEventListener("input", (e) => {
+    newProdPriceValid = checkNumField(e.target);
+  });
+
+  newQuantityInput.addEventListener("input", (e) => {
+    newProdQuantityValid = checkNumField(e.target);
+  });
+
+  newProductForm.addEventListener("submit", (e) => {
+    if (brandSelect.value === "default") {
+      newBrandIsValid = false;
+      brandSelect.nextElementSibling.style.display = "block";
+    } else {
+      newBrandIsValid = true;
+      brandSelect.nextElementSibling.style.display = "none";
+    }
+
+    if (
+      !newProdNameValid ||
+      !newProdPriceValid ||
+      !newProdQuantityValid ||
+      !newBrandIsValid
+    ) {
+      checkNameField(newProdNameInput);
+      checkNumField(newPriceInput);
+      checkNumField(newQuantityInput);
+      e.preventDefault();
+    }
+  });
+}
+
 function checkNameField(input) {
   if (input.value) {
     input.nextElementSibling.style.display = "none";
