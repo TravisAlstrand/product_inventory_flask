@@ -10,9 +10,12 @@
       </li>
       {% endfor %} {% else %} {% for product in items %}
       <li>
-        <a href="{{ url_for('product_detail', result=product.product_name) }}"
-          >{{product.product_name}}</a
-        >
+        <span>
+          <a href="{{ url_for('product_detail', result=product.product_name) }}"
+            >{{product.product_name}}
+          </a>
+          - Brand: {{ product.brand.brand_name }}
+        </span>
       </li>
       {% endfor %} {% endif %}
     </ul>
