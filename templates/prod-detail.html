@@ -2,6 +2,10 @@
 <section class="detail-container">
   {% if product %}
   <h2>{{product.product_name}}</h2>
+  <img
+    src="../static/images/product-images/{{img_name}}.jpg"
+    alt="image of {{product.product_name}}"
+  />
   <p>
     Brand:
     <a href="{{ url_for('brand_detail', result=product.brand.brand_name) }}">

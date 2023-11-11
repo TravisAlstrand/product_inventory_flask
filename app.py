@@ -39,7 +39,8 @@ def search_page(category=None, results=None):
 @app.route("/product/<result>")
 def product_detail(result):
   result = get_single_product(result)
-  return render_template("prod-detail.html", product=result)
+  img_name = result.product_name.replace(" ", "-")
+  return render_template("prod-detail.html", product=result, img_name=img_name)
 
 
 # BRAND DETAIL PAGE
@@ -47,7 +48,8 @@ def product_detail(result):
 def brand_detail(result):
   brand = get_single_brand(result)
   count = get_brand_product_count(result)
-  return render_template("brand-detail.html", brand=brand, count=count)
+  img_name = brand.brand_name.replace(" ", "-")
+  return render_template("brand-detail.html", brand=brand, count=count, img_name=img_name)
 
 
 # EDIT PAGE

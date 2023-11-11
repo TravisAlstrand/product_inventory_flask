@@ -2,6 +2,10 @@
 <section class="detail-container">
   {% if brand %}
   <h2>{{ brand.brand_name }}</h2>
+  <img
+    src="../static/images/brand-logos/{{img_name}}.jpg"
+    alt="{{brand.brand_name }} logo"
+  />
   <p>{{ brand.brand_description }}</p>
   <p>Products: {{ count }}</p>
   <a
