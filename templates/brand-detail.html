@@ -2,7 +2,8 @@
 <section class="detail-container">
   {% if brand %}
   <h2>{{ brand.brand_name }}</h2>
-  <p>{{ count }}</p>
+  <p>{{ brand.brand_description }}</p>
+  <p>Products: {{ count }}</p>
   <a
     href="{{ url_for('edit_page', category='brand', item=brand.brand_name)}}"
     class="btn"

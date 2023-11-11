@@ -13,6 +13,11 @@
       <input type="text" name="brand_name" id="newBrandNameInput" class="name-search" />
       <p class="error-msg">Name Cannot Be Blank!</p>
     </div>
+    <div class="label-input-div">
+      <label for="newBrandDescInput">Brand Description</label>
+      <textarea name="brand_description" id="newBrandDescInput"></textarea>
+      <p class="error-msg">Description Cannot Be Blank!</p>
+    </div>
   {% else %}
   <h2>New Product</h2>
   <form
@@ -30,6 +35,11 @@
         class="name-search"
       />
       <p class="error-msg">Name Cannot Be Blank!</p>
+    </div>
+    <div class="label-input-div">
+      <label for="newProdDescInput">Product Description</label>
+      <textarea name="product_description" id="newProdDescInput"></textarea>
+      <p class="error-msg">Description Cannot Be Blank!</p>
     </div>
     <div class="label-input-div">
       <label for="brandSelect">Brand</label>

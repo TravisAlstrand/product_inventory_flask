@@ -4,6 +4,7 @@ if (form) {
   const selectMenus = document.querySelectorAll("select");
   const textInputs = document.querySelectorAll("input.name-search");
   const numInputs = document.querySelectorAll("input.num");
+  const textAreas = document.querySelectorAll("textarea");
 
   // REAL TIME ERRORS
   if (textInputs.length) {
@@ -22,6 +23,14 @@ if (form) {
     });
   }
 
+  if (textAreas.length) {
+    textAreas.forEach((input) => {
+      input.addEventListener("input", () => {
+        checkNameField(input);
+      });
+    });
+  }
+
   // FORM SUBMIT
   form.addEventListener("submit", (e) => {
     let invalidMenus = [];
@@ -35,6 +44,12 @@ if (form) {
 
     // CHECK TEXT INPUTS
     textInputs.forEach((input) => {
+      if (!checkNameField(input)) {
+        invalidMenus.push(input);
+      }
+    });
+
+    textAreas.forEach((input) => {
       if (!checkNameField(input)) {
         invalidMenus.push(input);
       }

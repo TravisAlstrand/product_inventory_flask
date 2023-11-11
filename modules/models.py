@@ -10,6 +10,7 @@ class Brand(db.Model):
 
   brand_id = db.Column(db.Integer, primary_key=True)
   brand_name = db.Column(db.String())
+  brand_description = db.Column(db.Text())
   products = db.relationship("Product", back_populates="brand", cascade="all, delete, delete-orphan")
 
 
@@ -21,5 +22,6 @@ class Product(db.Model):
   product_price = db.Column(db.Integer)
   product_quantity = db.Column(db.Integer)
   date_updated = db.Column(db.Date)
+  product_description = db.Column(db.Text())
   brand_id = db.Column(db.Integer, db.ForeignKey("brands.brand_id"))
   brand = db.relationship("Brand", back_populates="products")

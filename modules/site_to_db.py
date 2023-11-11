@@ -3,13 +3,15 @@ from modules.handle_search import get_single_brand, get_single_product, check_if
 from modules.models import db, Product, Brand
 
 
-def updateBrand(original, new_name):
+def updateBrand(original, form_data):
   brand = get_single_brand(original)
   og_name = brand.brand_name.lower()
+  new_name = form_data["brand_name"]
   if brand:
     new_name_already_exists = check_if_exists("Brands", new_name.lower())
     if len(new_name_already_exists) == 0 or og_name == new_name.lower():
       brand.brand_name = new_name
+      brand.brand_description = form_data["brand_description"]
       brand.date_updated = datetime.date.today()
       db.session.commit()
       return "success"
@@ -30,6 +32,7 @@ def updateProduct(original, form_data):
       product.product_name = new_name
       product.product_price = form_data["product_price"]
       product.product_quantity = form_data["product_quantity"]
+      product.product_description = form_data["product_description"]
       product.date_updated = datetime.date.today()
       product.brand = new_brand
       db.session.commit()
@@ -44,7 +47,7 @@ def create_new(category, form_data):
   if category == "brand":
     brand_already_exists = check_if_exists("Brands", form_data["brand_name"].lower())
     if len(brand_already_exists) == 0:
-      new_brand = Brand(brand_name = form_data["brand_name"])
+      new_brand = Brand(brand_name = form_data["brand_name"], brand_description=form_data["brand_description"])
       db.session.add(new_brand)
       db.session.commit()
       return "success"
@@ -57,7 +60,7 @@ def create_new(category, form_data):
       new_brand_id = new_brand.brand_id
       new_product = Product(product_name=form_data["product_name"], product_price=form_data["product_price"],
                             product_quantity=form_data["product_quantity"], date_updated=datetime.date.today(),
-                            brand_id=new_brand_id)
+                            product_description=form_data["product_description"], brand_id=new_brand_id)
       db.session.add(new_product)
       db.session.commit()
       return "success"

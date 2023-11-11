@@ -55,7 +55,7 @@ def brand_detail(result):
 def edit_page(category, item):
   # IF SUBMITTING EDITS
   if request.form and category == "brand":
-    brand_edit_message = updateBrand(item, request.form["brand_name"])
+    brand_edit_message = updateBrand(item, request.form)
     if brand_edit_message == "success":
       return redirect(url_for("brand_detail", result=request.form["brand_name"]))
     else:

@@ -13,7 +13,7 @@ def add_csv_to_db():
       brand_is_in_db = db.session.query(Brand).filter(Brand.brand_name == row[0]).one_or_none()
       if brand_is_in_db is None:
         # if not in db, add it to db
-        name = Brand(brand_name=row[0])
+        name = Brand(brand_name=row[0], brand_description=row[1])
         db.session.add(name)
         db.session.commit()
       else: 
@@ -41,11 +41,11 @@ def build_new_product(row):
   price = clean_csv_price(row[1])
   quantity = clean_csv_quantity(row[2])
   date = clean_csv_date(row[3])
+  description = row[5]
   brand_id = db.session.query(Brand).filter(Brand.brand_name == row[4]).first().brand_id
-  print(brand_id)
   new_product = Product(product_name=name, product_price=price,
                         product_quantity=quantity, date_updated=date,
-                        brand_id=brand_id)
+                        product_description=description, brand_id=brand_id)
   db.session.add(new_product)
 
 

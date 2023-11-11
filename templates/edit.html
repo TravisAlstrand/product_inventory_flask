@@ -19,6 +19,13 @@
       />
       <p class="error-msg">Name Cannot Be Blank!</p>
     </div>
+    <div class="label-input-div">
+      <label for="brandDescInput">Edit Brand Description</label>
+      <textarea id="brandDescInput" name="brand_description">
+{{ item.brand_description }}</textarea
+      >
+      <p class="error-msg">Description Cannot Be Blank!</p>
+    </div>
     {% if error %}
     <p class="error-msg">{{ error }}!</p>
     {% endif %}
@@ -50,6 +57,13 @@
         value="{{ item.product_name }}"
       />
       <p class="error-msg">Name Cannot Be Blank!</p>
+    </div>
+    <div class="label-input-div">
+      <label for="prodDescInput">Edit Product Description</label>
+      <textarea id="prodDescInput" name="product_description">
+{{ item.product_description }}</textarea
+      >
+      <p class="error-msg">Description Cannot Be Blank!</p>
     </div>
     <div class="label-input-div">
       <label for="brandSelect">Change Brand</label>
