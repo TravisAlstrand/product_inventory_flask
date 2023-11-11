@@ -10,7 +10,7 @@
   >
     <div class="label-input-div">
       <label for="newBrandNameInput">Brand Name</label>
-      <input type="text" name="brand_name" id="newBrandNameInput" />
+      <input type="text" name="brand_name" id="newBrandNameInput" class="name-search" />
       <p class="error-msg">Name Cannot Be Blank!</p>
     </div>
   {% else %}
@@ -27,6 +27,7 @@
         type="text"
         name="product_name"
         id="newProdNameInput"
+        class="name-search"
       />
       <p class="error-msg">Name Cannot Be Blank!</p>
     </div>
@@ -49,6 +50,7 @@
         type="text"
         name="product_price"
         id="newPriceInput"
+        class="num"
       />
       <p class="error-msg">Field Cannot Be Blank!</p>
     </div>
@@ -58,6 +60,7 @@
         type="text"
         name="product_quantity"
         id="newQuantityInput"
+        class="num"
       />
       <p class="error-msg">Field Cannot Be Blank!</p>
     </div>

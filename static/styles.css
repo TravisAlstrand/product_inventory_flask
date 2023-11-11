@@ -17,8 +17,6 @@ a:visited {
   color: blue;
 }
 
-.category-select,
-.submit-btn,
 .error-msg {
   display: none;
 }

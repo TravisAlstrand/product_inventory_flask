@@ -1,141 +1,59 @@
-// GET STARTED PAGE
-const mainSelect1 = document.querySelector("#mainSelect1");
-const select2Div = document.querySelector("#categorySelect");
-const mainSelect2 = document.querySelector("#mainSelect2");
-const startSubmitBtn = document.querySelector("#startSubmitBtn");
+const form = document.querySelector("form");
 
-if (mainSelect1) {
-  mainSelect1.addEventListener("change", () => {
-    select2Div.style.display = "flex";
-    mainSelect2.value = "";
-    showBtn();
-  });
-}
+if (form) {
+  const selectMenus = document.querySelectorAll("select");
+  const textInputs = document.querySelectorAll("input.name-search");
+  const numInputs = document.querySelectorAll("input.num");
 
-if (mainSelect2) {
-  mainSelect2.addEventListener("change", () => {
-    showBtn();
-  });
-}
-
-function showBtn() {
-  if (mainSelect2.value !== "" && mainSelect1.value !== "") {
-    startSubmitBtn.style.display = "flex";
-  } else {
-    startSubmitBtn.style.display = "none";
+  // REAL TIME ERRORS
+  if (textInputs.length) {
+    textInputs.forEach((input) => {
+      input.addEventListener("input", () => {
+        checkNameField(input);
+      });
+    });
   }
-}
 
-// BRAND EDIT
-const brandEditForm = document.querySelector("#brandEditForm");
-const brandNameInput = document.querySelector("#brandNameInput");
-let brandIsValid = true;
+  if (numInputs.length) {
+    numInputs.forEach((input) => {
+      input.addEventListener("input", () => {
+        checkNumField(input);
+      });
+    });
+  }
 
-if (brandEditForm) {
-  brandNameInput.addEventListener("input", (e) => {
-    brandIsValid = checkNameField(e.target);
-  });
+  // FORM SUBMIT
+  form.addEventListener("submit", (e) => {
+    let invalidMenus = [];
 
-  brandEditForm.addEventListener("submit", (e) => {
-    if (!brandIsValid) {
+    // CHECK SELECT MENUS
+    selectMenus.forEach((menu) => {
+      if (!checkSelectField(menu)) {
+        invalidMenus.push(menu);
+      }
+    });
+
+    // CHECK TEXT INPUTS
+    textInputs.forEach((input) => {
+      if (!checkNameField(input)) {
+        invalidMenus.push(input);
+      }
+    });
+
+    // CHECK NUMBER INPUTS
+    numInputs.forEach((input) => {
+      if (!checkNumField(input)) {
+        invalidMenus.push(input);
+      }
+    });
+
+    if (invalidMenus.length) {
       e.preventDefault();
     }
   });
 }
 
-// PRODUCT EDIT
-const prodEditForm = document.querySelector("#productEditForm");
-const prodNameInput = document.querySelector("#productNameInput");
-const priceInput = document.querySelector("#priceInput");
-const quantityInput = document.querySelector("#quantityInput");
-let prodNameIsValid = true;
-let priceIsValid = true;
-let quantityIsValid = true;
-
-if (prodEditForm) {
-  prodNameInput.addEventListener("input", (e) => {
-    prodNameIsValid = checkNameField(e.target);
-  });
-
-  priceInput.addEventListener("input", (e) => {
-    priceIsValid = checkNumField(e.target);
-  });
-
-  quantityInput.addEventListener("input", (e) => {
-    quantityIsValid = checkNumField(e.target);
-  });
-
-  prodEditForm.addEventListener("submit", (e) => {
-    if (!prodNameIsValid || !priceIsValid || !quantityIsValid) {
-      e.preventDefault();
-    }
-  });
-}
-
-// NEW BRAND
-const newBrandForm = document.querySelector("#newBrandForm");
-const newBrandNameInput = document.querySelector("#newBrandNameInput");
-let newBrandIsValid = false;
-if (newBrandForm) {
-  newBrandNameInput.addEventListener("input", (e) => {
-    newBrandIsValid = checkNameField(e.target);
-  });
-
-  newBrandForm.addEventListener("submit", (e) => {
-    if (!newBrandIsValid) {
-      checkNameField(newBrandNameInput);
-      e.preventDefault();
-    }
-  });
-}
-
-// NEW PRODUCT
-const newProductForm = document.querySelector("#newProductForm");
-const newProdNameInput = document.querySelector("#newProdNameInput");
-const brandSelect = document.querySelector("#brandSelect");
-const newPriceInput = document.querySelector("#newPriceInput");
-const newQuantityInput = document.querySelector("#newQuantityInput");
-let newProdNameValid = false;
-let newProdBrandValid = false;
-let newProdPriceValid = false;
-let newProdQuantityValid = false;
-
-if (newProductForm) {
-  newProdNameInput.addEventListener("input", (e) => {
-    newProdNameValid = checkNameField(e.target);
-  });
-
-  newPriceInput.addEventListener("input", (e) => {
-    newProdPriceValid = checkNumField(e.target);
-  });
-
-  newQuantityInput.addEventListener("input", (e) => {
-    newProdQuantityValid = checkNumField(e.target);
-  });
-
-  newProductForm.addEventListener("submit", (e) => {
-    if (brandSelect.value === "default") {
-      newBrandIsValid = false;
-      brandSelect.nextElementSibling.style.display = "block";
-    } else {
-      newBrandIsValid = true;
-      brandSelect.nextElementSibling.style.display = "none";
-    }
-
-    if (
-      !newProdNameValid ||
-      !newProdPriceValid ||
-      !newProdQuantityValid ||
-      !newBrandIsValid
-    ) {
-      checkNameField(newProdNameInput);
-      checkNumField(newPriceInput);
-      checkNumField(newQuantityInput);
-      e.preventDefault();
-    }
-  });
-}
-
+// HELPER FUNCTIONS
 function checkNameField(input) {
   if (input.value) {
     input.nextElementSibling.style.display = "none";
@@ -162,5 +80,15 @@ function checkNumField(input) {
     input.nextElementSibling.textContent = "Field Cannot Be Blank!";
     input.nextElementSibling.style.display = "block";
     return false;
+  }
+}
+
+function checkSelectField(menu) {
+  if (menu.value === "") {
+    menu.nextElementSibling.style.display = "block";
+    return false;
+  } else {
+    menu.nextElementSibling.style.display = "none";
+    return true;
   }
 }
