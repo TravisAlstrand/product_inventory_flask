@@ -1,28 +1,31 @@
 product_name,product_price,product_quantity,date_updated,brand_name
-Bagel - Whole White Sesame,$4.30,97,11/1/2018,Einstein's
-Sauce - Caesar Dressing,$8.05,81,12/28/2018,Kraft
-Shiratamako - Rice Flour,$7.99,71,3/7/2018,Bob's Red Mill
-Tart - Raisin And Pecan,$1.06,86,1/18/2019,Delish
-Radish,$2.47,22,11/6/2018,Kroger
-Juice - V8 Splash,$1.25,67,1/10/2018,V8
-Red Currants,$6.77,49,10/1/2018,Kroger
-Soup - Base Broth Beef,$5.44,62,3/9/2019,Campbell's
-Tomatoes Tear Drop Yellow,$0.64,73,2/9/2019,Kroger
-Mussels - Cultivated,$9.34,24,7/31/2018,Kroger
-"Bread - Crumbs, Bulk",$4.49,88,1/12/2019,Kikkoman
-"Beans - Long, Chinese",$4.73,47,9/22/2018,Del Monte
-"Beans - Navy, Dry",$4.60,44,1/20/2018,Del Monte
-Juice - V8 Splash,$1.15,67,1/13/2018,V8
-"Basil - Dry, Rubbed",$8.69,21,2/4/2018,Kroger
-Apple - Granny Smith,$5.06,72,1/12/2018,Kroger
-"Lid - High Heat, Super Clear",$1.23,5,2/9/2018,Farberware
-Oranges - Navel,$4.78,46,6/6/2018,Kroger
-Berry Brulee,$7.59,50,8/25/2018,Kroger
-Lobster - Canned Premium,$7.61,57,4/15/2018,Kroger
-Sauce - Caesar Dressing,$8.25,16,4/10/2019,Kraft
-Ham - Procutinni,$5.70,8,1/9/2019,Kroger
-Veal - Ground,$7.67,5,12/19/2018,Kroger
-Oil - Cooking Spray,$4.20,6,6/11/2018,Pam
-"Extract - Vanilla,artificial",$2.91,20,6/8/2018,McCormick
-"Mushroom - Porcini, Dry",$8.14,71,7/26/2018,Kroger
-Wine - Cabernet Sauvignon,$7.41,54,3/10/2018,Chateau Bonnet
+Endura Shield,$159.30,97,11/1/2018,Mithril Works
+Golden Ale,$4.99,176,10/28/2021,Shire Brews
+Elanor Loom,$75.99,23,3/7/2021,Rivendell Crafts
+Citadel Charger,$59.99,86,10/18/2023,Gondor Gadgets
+Orthanc Oscillator,$25.99,22,11/6/2018,Isengard Industries
+Eorl Express,$19.25,67,1/10/2018,Rohan Riders
+Entwood Essence,$16.77,49,10/1/2018,Fangorn Forestry
+Galadriel Garments,$45.44,62,3/9/2019,Lothlorien Looms
+Fangorn Fantasy,$100.64,73,2/9/2019,Ent Entertainment
+Butterbur Buns,$5.99,24,7/31/2018,Bree Bakery
+Arkenstone Artifacts,$144.49,88,1/12/2019,Erebor Exports
+Hobbiton Honeycakes,$4.99,47,9/22/2018,Bree Bakery
+Treebeard's Tales,$34.60,44,1/20/2018,Ent Entertainment
+Smaug's Spices,$18.51,44,3/22/2018,Erebor Exports
+Théoden Throttle,$31.15,67,1/13/2018,Rohan Riders
+Saruman Sensors,$8.69,21,2/4/2018,Isengard Industries
+Treebeard Timber,$115.06,72,1/12/2018,Fangorn Forestry
+Vilya Vase,$160.59,33,6/6/2023,Rivendell Crafts
+White Tree Wireless,$49.99,50,8/25/2023,Gondor Gadgets
+Huorn Habitat,$37.61,57,4/15/2018,Fangorn Forestry
+Anduin Adventures,$145.70,4,11/29/2019,Minas Mirth
+Old Toby Porter,$8.99,102,4/10/2023,Shire Brews
+Mallorn Mantles,$15.70,8,1/9/2019,Lothlorien Looms
+Lindon Lanterns,$69.99,5,12/19/2023,Rivendell Crafts
+Uruk Forge,$4.20,6,6/11/2018,Isengard Industries
+Quickbeam Quests,$82.91,20,6/8/2018,Ent Entertainment
+Dark Tower Design,$98.14,71,7/26/2018,BaradDur Builders
+Greenleaf Gardening,$17.41,54,3/10/2018,Fangorn Forestry
+Durin's Durables,$69.99,18,1/29/2023,Erebor Exports
+Gondorian Games,$48.99,15,5/18/2023,Minas Mirth
