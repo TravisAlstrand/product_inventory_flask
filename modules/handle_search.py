@@ -56,4 +56,13 @@ def get_all_brands():
   all_brands = []
   for item in db.session.query(Brand):
     all_brands.append(item)
+  all_brands.sort(key=lambda x: x.brand_name.lower())
   return all_brands
+
+
+def get_all_products():
+  all_products = []
+  for item in db.session.query(Product):
+    all_products.append(item)
+  all_products.sort(key=lambda x: x.product_name.lower())
+  return all_products

@@ -1,0 +1,22 @@
+{% extends "layout.html" %} {% block content %}
+<section class="browse-container">
+  <div>
+    <ul>
+      {% if category == "brands" %} {% for brand in items %}
+      <li>
+        <a href="{{ url_for('brand_detail', result=brand.brand_name) }}"
+          >{{brand.brand_name}}</a
+        >
+      </li>
+      {% endfor %} {% else %} {% for product in items %}
+      <li>
+        <a href="{{ url_for('product_detail', result=product.product_name) }}"
+          >{{product.product_name}}</a
+        >
+      </li>
+      {% endfor %} {% endif %}
+    </ul>
+  </div>
+  <a href="{{ url_for('get_started') }}" class="btn">Back</a>
+</section>
+{% endblock %}

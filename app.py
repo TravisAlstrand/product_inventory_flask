@@ -2,7 +2,8 @@ from flask import render_template, request, redirect, url_for
 from os.path import exists
 from modules.models import db, app
 from modules.csv_to_db import add_csv_to_db
-from modules.handle_search import handle_search, get_single_product, get_single_brand, get_brand_product_count, get_all_brands
+from modules.handle_search import (handle_search, get_single_product, get_single_brand,
+                                   get_brand_product_count, get_all_brands, get_all_products)
 from modules.site_to_db import updateBrand, updateProduct, create_new
 
 # HOME
@@ -19,6 +20,8 @@ def get_started():
       return redirect(url_for("search_page", category=request.form["b_or_p"]))
     elif request.form["category"] == "create":
       return redirect(url_for("create_new_page", category=request.form["b_or_p"]))
+    else:
+      return redirect(url_for("browse_page", category=request.form["b_or_p"], sort="alphabetical"))
   return render_template("get-started.html")
 
 
@@ -87,6 +90,15 @@ def create_new_page(category):
 
   all_brands = get_all_brands()
   return render_template("create-new.html", category=new_cat, brands=all_brands)
+
+
+@app.route("/<category>/browse/<sort>")
+def browse_page(category, sort="alphabetical"):
+  if category == "brands":
+    items = get_all_brands()
+  else:
+    items = get_all_products()
+  return render_template("browse.html", category=category, items=items)
 
   
 # ALREADY EXISTS ERROR PAGE EDIT
