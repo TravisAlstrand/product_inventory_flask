@@ -3,7 +3,7 @@
   {% if product %}
   <h2>{{product.product_name}}</h2>
   <img
-    src="../static/images/product-images/{{img_name}}.jpg"
+    src="/static/images/product-images/{{img_name}}.jpg"
     alt="image of {{product.product_name}}"
   />
   <p>
@@ -26,7 +26,7 @@
   {% else %}
   <h2>Oops! There was an issue, try again.</h2>
   {% endif %}
-  <a href="{{ url_for('search_page', category='products')}}" class="btn">
+  <a href="{{ url_for('search_page', category='product')}}" class="btn">
     Search Products
   </a>
 </section>

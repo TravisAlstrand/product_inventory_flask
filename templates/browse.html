@@ -2,7 +2,7 @@
 <section class="browse-container">
   <div>
     <ul>
-      {% if category == "brands" %} {% for brand in items %}
+      {% if category == "brand" %} {% for brand in items %}
       <li>
         <a href="{{ url_for('brand_detail', result=brand.brand_name) }}"
           >{{brand.brand_name}}</a

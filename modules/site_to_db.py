@@ -8,7 +8,7 @@ def updateBrand(original, form_data):
   og_name = brand.brand_name.lower()
   new_name = form_data["brand_name"]
   if brand:
-    new_name_already_exists = check_if_exists("Brands", new_name.lower())
+    new_name_already_exists = check_if_exists("brand", new_name.lower())
     if len(new_name_already_exists) == 0 or og_name == new_name.lower():
       brand.brand_name = new_name
       brand.brand_description = form_data["brand_description"]
@@ -26,7 +26,7 @@ def updateProduct(original, form_data):
   product = get_single_product(original)
   og_name = product.product_name.lower()
   if product:
-    new_name_already_exists = check_if_exists("Products", new_name.lower())
+    new_name_already_exists = check_if_exists("product", new_name.lower())
     if len(new_name_already_exists) == 0 or new_name.lower() == og_name:
       new_brand = get_single_brand(form_data["brand_name"])
       product.product_name = new_name
@@ -45,7 +45,7 @@ def updateProduct(original, form_data):
 
 def create_new(category, form_data):
   if category == "brand":
-    brand_already_exists = check_if_exists("Brands", form_data["brand_name"].lower())
+    brand_already_exists = check_if_exists("brand", form_data["brand_name"].lower())
     if len(brand_already_exists) == 0:
       new_brand = Brand(brand_name = form_data["brand_name"], brand_description=form_data["brand_description"])
       db.session.add(new_brand)
@@ -54,7 +54,7 @@ def create_new(category, form_data):
     else:
       return f"There is already a Brand with the name {form_data['brand_name']}, try again!"
   else:
-    product_already_exists = check_if_exists("Products", form_data["product_name"].lower())
+    product_already_exists = check_if_exists("product", form_data["product_name"].lower())
     if len(product_already_exists) == 0:
       new_brand = get_single_brand(form_data["brand_name"])
       new_brand_id = new_brand.brand_id

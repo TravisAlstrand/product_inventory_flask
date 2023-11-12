@@ -9,11 +9,11 @@
     Go Back
   </a>
   {% if category == "brand" %}
-  <a href="{{ url_for('search_page', category='brands') }}" class="btn">
+  <a href="{{ url_for('search_page', category=category) }}" class="btn">
     Brand Search
   </a>
   {% else %}
-  <a href="{{ url_for('search_page', category='products') }}" class="btn">
+  <a href="{{ url_for('search_page', category=category) }}" class="btn">
     Product Search
   </a>
   {% endif %}

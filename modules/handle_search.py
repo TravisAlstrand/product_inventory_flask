@@ -4,9 +4,9 @@ from modules.models import db, Product, Brand
 def handle_search(table, query):
   results = []
 
-  if table == "Products":
+  if table == "product":
     table = Product
-  elif table == "Brands":
+  elif table == "brand":
     table = Brand
 
   for item in db.session.query(table):
@@ -22,9 +22,9 @@ def handle_search(table, query):
 def check_if_exists(table, query):
   results = []
 
-  if table == "Products":
+  if table == "product":
     table = Product
-  elif table == "Brands":
+  elif table == "brand":
     table = Brand
 
   for item in db.session.query(table):

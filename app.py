@@ -16,12 +16,12 @@ def index():
 @app.route("/get-started", methods=["GET", "POST"])
 def get_started():
   if request.form:
-    if request.form["category"] == "search":
-      return redirect(url_for("search_page", category=request.form["b_or_p"]))
-    elif request.form["category"] == "create":
-      return redirect(url_for("create_new_page", category=request.form["b_or_p"]))
+    if request.form["activity"] == "search":
+      return redirect(url_for("search_page", category=request.form["category"]))
+    elif request.form["activity"] == "create":
+      return redirect(url_for("create_new_page", category=request.form["category"]))
     else:
-      return redirect(url_for("browse_page", category=request.form["b_or_p"], sort="alphabetical"))
+      return redirect(url_for("browse_page", category=request.form["category"]))
   return render_template("get-started.html")
 
 
@@ -31,12 +31,12 @@ def search_page(category=None, results=None):
   search_query = None
   if request.form:
     search_query = request.form["search"]
-    results = handle_search(category.capitalize(), search_query.lower())
+    results = handle_search(category, search_query.lower())
   return render_template("search.html", category=category, query=search_query, results=results)
 
 
 # PRODUCT DETAIL PAGE
-@app.route("/product/<result>")
+@app.route("/product/detail/<result>")
 def product_detail(result):
   result = get_single_product(result)
   img_name = result.product_name.replace(" ", "-")
@@ -44,7 +44,7 @@ def product_detail(result):
 
 
 # BRAND DETAIL PAGE
-@app.route("/brand/<result>")
+@app.route("/brand/detail/<result>")
 def brand_detail(result):
   brand = get_single_brand(result)
   count = get_brand_product_count(result)
@@ -81,22 +81,21 @@ def edit_page(category, item):
 # CREATE NEW PAGE
 @app.route("/<category>/create-new", methods=["GET", "POST"])
 def create_new_page(category):
-
-  new_cat = category.replace("s", "")
   if request.form:
-    new_item_message = create_new(new_cat, request.form)
+    new_item_message = create_new(category, request.form)
     if new_item_message == "success":
-      return redirect(url_for(f"{new_cat}_detail", result=request.form[f"{new_cat}_name"]))
+      return redirect(url_for(f"{category}_detail", result=request.form[f"{category}_name"]))
     else:
-      return redirect(url_for("dupe_new_error_page", category=category, new_name=request.form[f"{new_cat}_name"]))
+      return redirect(url_for("dupe_new_error_page", category=category, new_name=request.form[f"{category}_name"]))
 
   all_brands = get_all_brands()
-  return render_template("create-new.html", category=new_cat, brands=all_brands)
+  return render_template("create-new.html", category=category, brands=all_brands)
 
 
-@app.route("/<category>/browse/<sort>")
-def browse_page(category, sort="alphabetical"):
-  if category == "brands":
+# BROWSE PAGE
+@app.route("/<category>/browse-all")
+def browse_page(category):
+  if category == "brand":
     items = get_all_brands()
   else:
     items = get_all_products()

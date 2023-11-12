@@ -1,21 +1,21 @@
 {% extends "layout.html" %} {% block content %}
 <section class="search-page-container">
-  {% if category and category == "products" or category == "brands" %}
+  {% if category and category == "product" or category == "brand" %}
   <h2>{{ category.capitalize() }} Search</h1>
   {% else %}
   <h2>Looks like you missed a step!</h2>
   {% endif %}
   <a href="{{ url_for('get_started')}}" class="btn">Go Back</a>
-  {% if category and category == "products" or category == "brands" %}
+  {% if category and category == "product" or category == "brand" %}
   <form
     action="{{ url_for('search_page', category=category) }}"
     method="POST"
     class="search-form"
   >
     <div class="label-input-div">
-      {% if category == "products" %}
+      {% if category == "product" %}
       <label for="searchInput">Search by Product Name</label>
-      {% elif category == "brands" %}
+      {% elif category == "brand" %}
       <label for="searchInput">Search by Brand Name</label>
       {% endif %}
       <input type="search" name="search" id="searchInput" class="name-search"/>
@@ -32,9 +32,9 @@
   <p>Oops! No results found, try again!</p>
   {% else %}
     {% for result in results %}
-      {% if category == "products" %}
+      {% if category == "product" %}
       <a href="{{ url_for('product_detail', result=result.product_name) }}">{{result.product_name}}</a>
-      {% elif category == "brands" %}
+      {% elif category == "brand" %}
       <a href="{{ url_for('brand_detail', result=result.brand_name) }}">{{result.brand_name}}</a>
       {% endif %}
     {% endfor %}
