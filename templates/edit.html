@@ -30,10 +30,10 @@
     <p class="error-msg">{{ error }}!</p>
     {% endif %}
     <div class="submit-cancel-div">
-      <button type="submit">Submit</button>
+      <button type="submit" class="btn">Submit</button>
       <a
         href="{{ url_for('brand_detail', result=item.brand_name) }}"
-        class="btn"
+        class="btn cancel"
       >
         Cancel
       </a>
@@ -102,10 +102,10 @@
       <p class="error-msg">Field Cannot Be Blank!</p>
     </div>
     <div class="submit-cancel-div">
-      <button type="submit">Submit</button>
+      <button type="submit" class="btn">Submit</button>
       <a
         href="{{ url_for('product_detail', result=item.product_name) }}"
-        class="btn"
+        class="btn cancel"
       >
         Cancel
       </a>

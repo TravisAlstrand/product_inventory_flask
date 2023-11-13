@@ -20,17 +20,23 @@
         <ul>
           <li><a href="{{ url_for('index') }}">Home</a></li>
           <li>
-            <a href="{{ url_for('category_select', activity='browse')}}"
+            <a
+              href="{{ url_for('category_select', activity='browse')}}"
+              class="btn nav-btn"
               >Browse All</a
             >
           </li>
           <li>
-            <a href="{{ url_for('category_select', activity='search')}}"
+            <a
+              href="{{ url_for('category_select', activity='search')}}"
+              class="btn nav-btn"
               >Search</a
             >
           </li>
           <li>
-            <a href="{{ url_for('category_select', activity='create')}}"
+            <a
+              href="{{ url_for('category_select', activity='create')}}"
+              class="btn nav-btn"
               >Create New</a
             >
           </li>
