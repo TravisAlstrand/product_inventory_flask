@@ -1,12 +1,10 @@
 {% extends "layout.html" %} {% block content %}
 <section class="search-page-container">
   {% if category and category == "product" or category == "brand" %}
-  <h2>{{ category.capitalize() }} Search</h1>
+  <h1>{{ category.capitalize() }} Search</h1>
   {% else %}
-  <h2>Looks like you missed a step!</h2>
-  {% endif %}
-  <a href="{{ url_for('get_started')}}" class="btn">Go Back</a>
-  {% if category and category == "product" or category == "brand" %}
+  <h1>Looks like you missed a step!</h1>
+  {% endif %} {% if category and category == "product" or category == "brand" %}
   <form
     action="{{ url_for('search_page', category=category) }}"
     method="POST"
@@ -18,7 +16,7 @@
       {% elif category == "brand" %}
       <label for="searchInput">Search by Brand Name</label>
       {% endif %}
-      <input type="search" name="search" id="searchInput" class="name-search"/>
+      <input type="search" name="search" id="searchInput" class="name-search" />
       <p class="error-msg">Type something, precious!</p>
     </div>
     <button type="submit">Submit</button>
@@ -27,18 +25,17 @@
 </section>
 {% if query %}
 <section>
-  <h2>Results for {{ query }}</h2>
+  <h1>Results for {{ query }}</h1>
   {% if not results %}
   <p>Oops! No results found, try again!</p>
-  {% else %}
-    {% for result in results %}
-      {% if category == "product" %}
-      <a href="{{ url_for('product_detail', result=result.product_name) }}">{{result.product_name}}</a>
-      {% elif category == "brand" %}
-      <a href="{{ url_for('brand_detail', result=result.brand_name) }}">{{result.brand_name}}</a>
-      {% endif %}
-    {% endfor %}
-  {% endif %}
+  {% else %} {% for result in results %} {% if category == "product" %}
+  <a href="{{ url_for('product_detail', result=result.product_name) }}"
+    >{{result.product_name}}</a
+  >
+  {% elif category == "brand" %}
+  <a href="{{ url_for('brand_detail', result=result.brand_name) }}"
+    >{{result.brand_name}}</a
+  >
+  {% endif %} {% endfor %} {% endif %}
 </section>
-{% endif %}
-{% endblock %}
+{% endif %} {% endblock %}

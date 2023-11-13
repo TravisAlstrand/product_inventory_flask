@@ -24,3 +24,20 @@ a:visited {
 .error-msg {
   color: red;
 }
+
+body {
+  height: 100%;
+  border: 75px solid black;
+  border-image: url("/static/images/borders/borders.png") 33% round;
+}
+
+main {
+  max-height: 100vh;
+}
+
+@media (min-width: 1024px) {
+  body {
+    border: 189px solid black;
+    border-image: url("/static/images/borders/borders.png") 33% round;
+  }
+}

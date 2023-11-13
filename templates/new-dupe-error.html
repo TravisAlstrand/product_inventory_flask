@@ -1,6 +1,6 @@
 {% extends "layout.html" %} {% block content %}
 <section>
-  <h2>OOPS!</h2>
+  <h1>OOPS!</h1>
   <p>A {{ cat_single }} already exists with the name "{{ name }}"!</p>
   <a href="{{ url_for('create_new_page', category=cat_plural) }}" class="btn">
     Go Back

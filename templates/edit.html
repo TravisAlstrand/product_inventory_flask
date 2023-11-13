@@ -1,7 +1,7 @@
 {% extends "layout.html" %} {% block content %}
 <section>
   {% if category == 'brand' %}
-  <h2>Edit {{item.brand_name}}</h2>
+  <h1>Edit {{item.brand_name}}</h1>
   <form
     action="{{ url_for('edit_page', category=category, item=item.brand_name) }}"
     method="POST"
@@ -40,7 +40,7 @@
     </div>
   </form>
   {% else %}
-  <h2>Edit {{item.product_name}}</h2>
+  <h1>Edit {{item.product_name}}</h1>
   <form
     action="{{ url_for('edit_page', category=category, item=item.product_name) }}"
     method="POST"

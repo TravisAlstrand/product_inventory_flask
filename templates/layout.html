@@ -15,10 +15,29 @@
     />
   </head>
   <body>
-    <header>
-      <h1>S.M.E.A.G.O.L.</h1>
-    </header>
-    <main>{% block content %} {% endblock %}</main>
+    <main>
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li>
+            <a href="{{ url_for('category_select', activity='browse')}}"
+              >Browse All</a
+            >
+          </li>
+          <li>
+            <a href="{{ url_for('category_select', activity='search')}}"
+              >Search</a
+            >
+          </li>
+          <li>
+            <a href="{{ url_for('category_select', activity='create')}}"
+              >Create New</a
+            >
+          </li>
+        </ul>
+      </nav>
+      {% block content %} {% endblock %}
+    </main>
     <script src="/static/app.js"></script>
   </body>
 </html>

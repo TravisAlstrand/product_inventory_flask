@@ -1,11 +1,13 @@
 {% extends "layout.html" %} {% block content %}
 <section class="detail-container">
   {% if brand %}
-  <h2>{{ brand.brand_name }}</h2>
+  <h1>{{ brand.brand_name }}</h1>
+  {% if has_img == True %}
   <img
     src="/static/images/brand-logos/{{img_name}}.jpg"
     alt="{{brand.brand_name }} logo"
   />
+  {% endif %}
   <p>{{ brand.brand_description }}</p>
   <p>Products: {{ count }}</p>
   <a
@@ -16,7 +18,7 @@
   </a>
   <a href="#" class="btn">Delete Brand</a>
   {% else %}
-  <h2>Oops! There was an issue, try again.</h2>
+  <h1>Oops! There was an issue, try again.</h1>
   {% endif %}
   <a href="{{ url_for('search_page', category='brand')}}" class="btn">
     Search Brands

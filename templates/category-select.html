@@ -1,0 +1,15 @@
+{% extends "layout.html" %} {% block content %}
+<section>
+  <h1>Select what to {{activity}}</h1>
+  {% if activity == "browse" %}
+  <a href="{{url_for('browse_page', category='brand') }}">Brands</a>
+  <a href="{{url_for('browse_page', category='product') }}">Products</a>
+  {% elif activity == "search" %}
+  <a href="{{url_for('search_page', category='brand') }}">Brands</a>
+  <a href="{{url_for('search_page', category='product') }}">Products</a>
+  {% else %}
+  <a href="{{url_for('create_new_page', category='brand') }}">Brands</a>
+  <a href="{{url_for('create_new_page', category='product') }}">Products</a>
+  {% endif %}
+</section>
+{% endblock %}

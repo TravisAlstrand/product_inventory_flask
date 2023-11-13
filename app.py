@@ -12,17 +12,19 @@ def index():
   return render_template("index.html")
 
 
-# GET STARTED
-@app.route("/get-started", methods=["GET", "POST"])
-def get_started():
-  if request.form:
-    if request.form["activity"] == "search":
-      return redirect(url_for("search_page", category=request.form["category"]))
-    elif request.form["activity"] == "create":
-      return redirect(url_for("create_new_page", category=request.form["category"]))
-    else:
-      return redirect(url_for("browse_page", category=request.form["category"]))
-  return render_template("get-started.html")
+# CATEGORY SELECT
+@app.route("/<activity>/category-select")
+def category_select(activity):
+  return render_template("category-select.html", activity=activity)
+
+# BROWSE PAGE
+@app.route("/<category>/browse-all")
+def browse_page(category):
+  if category == "brand":
+    items = get_all_brands()
+  else:
+    items = get_all_products()
+  return render_template("browse.html", category=category, items=items)
 
 
 # SEARCH PAGE
@@ -35,12 +37,26 @@ def search_page(category=None, results=None):
   return render_template("search.html", category=category, query=search_query, results=results)
 
 
+# CREATE NEW PAGE
+@app.route("/<category>/create-new", methods=["GET", "POST"])
+def create_new_page(category):
+  if request.form:
+    new_item_message = create_new(category, request.form)
+    if new_item_message == "success":
+      return redirect(url_for(f"{category}_detail", result=request.form[f"{category}_name"]))
+    else:
+      return redirect(url_for("dupe_new_error_page", category=category, new_name=request.form[f"{category}_name"]))
+  all_brands = get_all_brands()
+  return render_template("create-new.html", category=category, brands=all_brands)
+
+
 # PRODUCT DETAIL PAGE
 @app.route("/product/detail/<result>")
 def product_detail(result):
   result = get_single_product(result)
   img_name = result.product_name.replace(" ", "-")
-  return render_template("prod-detail.html", product=result, img_name=img_name)
+  has_img = exists(f"./static/images/product-images/{img_name}.jpg")
+  return render_template("prod-detail.html", product=result, has_img=has_img, img_name=img_name)
 
 
 # BRAND DETAIL PAGE
@@ -49,7 +65,8 @@ def brand_detail(result):
   brand = get_single_brand(result)
   count = get_brand_product_count(result)
   img_name = brand.brand_name.replace(" ", "-")
-  return render_template("brand-detail.html", brand=brand, count=count, img_name=img_name)
+  has_img = exists(f"./static/images/brand-logos/{img_name}.jpg")
+  return render_template("brand-detail.html", brand=brand, count=count, has_img=has_img, img_name=img_name)
 
 
 # EDIT PAGE
@@ -76,36 +93,13 @@ def edit_page(category, item):
     item = get_single_product(item)
     all_brands = get_all_brands()
     return render_template("edit.html", category=category, item=item, brands=all_brands)
-  
-
-# CREATE NEW PAGE
-@app.route("/<category>/create-new", methods=["GET", "POST"])
-def create_new_page(category):
-  if request.form:
-    new_item_message = create_new(category, request.form)
-    if new_item_message == "success":
-      return redirect(url_for(f"{category}_detail", result=request.form[f"{category}_name"]))
-    else:
-      return redirect(url_for("dupe_new_error_page", category=category, new_name=request.form[f"{category}_name"]))
-
-  all_brands = get_all_brands()
-  return render_template("create-new.html", category=category, brands=all_brands)
 
 
-# BROWSE PAGE
-@app.route("/<category>/browse-all")
-def browse_page(category):
-  if category == "brand":
-    items = get_all_brands()
-  else:
-    items = get_all_products()
-  return render_template("browse.html", category=category, items=items)
-
-  
 # ALREADY EXISTS ERROR PAGE EDIT
 @app.route("/error/<category>/<item>/<new_name>")
 def duplicate_error_page(category, item, new_name):
   return render_template("dupe-error.html", category=category, item=item, new_name=new_name)
+
 
 # ALREADY EXISTS ERROR PAGE NEW
 @app.route("/error/<category>/<new_name>")
@@ -121,7 +115,7 @@ def not_found(error):
 
 
 if __name__ == "__main__":
-  db_exists = exists("./instance/projects.db")
+  db_exists = exists("./instance/products.db")
   if db_exists is False:
     with app.app_context():
       db.create_all()
