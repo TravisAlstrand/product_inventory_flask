@@ -67,3 +67,21 @@ def create_new(category, form_data):
     else:
       return f"There is already a Product with the name {form_data['product_name']}, try again!"
 
+
+def delete_item(category, item_name):
+  if category == "brand":
+    brand = get_single_brand(item_name)
+    if brand:
+      db.session.delete(brand)
+      db.session.commit()
+      return "success"
+    else:
+      return "error"
+  else:
+    product = get_single_product(item_name)
+    if product:
+      db.session.delete(product)
+      db.session.commit()
+      return "success"
+    else:
+      return "error"

@@ -4,7 +4,7 @@ from modules.models import db, app
 from modules.csv_to_db import add_csv_to_db
 from modules.handle_search import (handle_search, get_single_product, get_single_brand,
                                    get_brand_product_count, get_all_brands, get_all_products)
-from modules.site_to_db import updateBrand, updateProduct, create_new
+from modules.site_to_db import updateBrand, updateProduct, create_new, delete_item
 
 # HOME
 @app.route("/")
@@ -93,6 +93,18 @@ def edit_page(category, item):
     item = get_single_product(item)
     all_brands = get_all_brands()
     return render_template("edit.html", category=category, item=item, brands=all_brands)
+  
+
+# DELETE PAGE
+@app.route("/<category>/confirm/<item>")
+def delete_confirm_page(category, item):
+  return render_template("delete-confirm.html", category=category, item=item)
+
+
+@app.route("/<category>/delete/<item>")
+def delete_route(category, item):
+  delete_item(category, item)
+  return redirect(url_for("index"))
 
 
 # ALREADY EXISTS ERROR PAGE EDIT

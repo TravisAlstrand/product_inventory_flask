@@ -24,12 +24,14 @@
   >
     Edit Product
   </a>
-  <a href="#" class="btn"> Delete Product </a>
+  <a
+    href="{{ url_for('delete_confirm_page', category='product', item=product.product_name) }}"
+    class="btn"
+  >
+    Delete Product
+  </a>
   {% else %}
   <h1>Oops! There was an issue, try again.</h1>
   {% endif %}
-  <a href="{{ url_for('search_page', category='product')}}" class="btn">
-    Search Products
-  </a>
 </section>
 {% endblock %}

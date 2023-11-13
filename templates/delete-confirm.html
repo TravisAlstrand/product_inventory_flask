@@ -1,0 +1,9 @@
+{% extends "layout.html" %} {% block content %}
+<section>
+  <h1>Confirm deletion of {{ category.capitalize() }} - {{ item }}</h1>
+  <a href="{{ url_for('delete_route', category=category, item=item) }}"
+    >Yes, Delete</a
+  >
+  <a href="{{ url_for('index') }}">Cancel</a>
+</section>
+{% endblock %}

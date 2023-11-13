@@ -26,13 +26,14 @@ a:visited {
 }
 
 body {
+  min-height: 100vh;
   height: 100%;
   border: 75px solid black;
   border-image: url("/static/images/borders/borders.png") 33% round;
 }
 
-main {
-  max-height: 100vh;
+img {
+  max-width: 100%;
 }
 
 @media (min-width: 1024px) {
