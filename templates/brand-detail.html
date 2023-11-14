@@ -6,23 +6,26 @@
   <img
     src="/static/images/brand-logos/{{img_name}}.jpg"
     alt="{{brand.brand_name }} logo"
+    class="brand-logo"
   />
   {% endif %}
   <p>{{ brand.brand_description }}</p>
   <p>Products: {{ count }}</p>
-  <a
-    href="{{ url_for('edit_page', category='brand', item=brand.brand_name)}}"
-    class="btn"
-  >
-    Edit Brand
-  </a>
-  <a
-    href="{{ url_for('delete_confirm_page', category='brand', item=brand.brand_name) }}"
-    class="btn cancel"
-    >Delete Brand</a
-  >
+  <div class="horiz-btn-div">
+    <a
+      href="{{ url_for('edit_page', category='brand', item=brand.brand_name)}}"
+    >
+      Edit Brand
+    </a>
+    <a
+      href="{{ url_for('delete_confirm_page', category='brand', item=brand.brand_name) }}"
+      class="cancel"
+      >Delete Brand</a
+    >
+  </div>
   {% else %}
   <h1>Oops! There was an issue, try again.</h1>
   {% endif %}
+  <a href="{{ url_for('browse_page', category='brand')}}">Back</a>
 </section>
 {% endblock %}

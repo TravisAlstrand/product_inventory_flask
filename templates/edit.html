@@ -29,11 +29,11 @@
     {% if error %}
     <p class="error-msg">{{ error }}!</p>
     {% endif %}
-    <div class="submit-cancel-div">
-      <button type="submit" class="btn">Submit</button>
+    <div class="horiz-btn-div">
+      <button type="submit">Submit</button>
       <a
         href="{{ url_for('brand_detail', result=item.brand_name) }}"
-        class="btn cancel"
+        class="cancel"
       >
         Cancel
       </a>
@@ -101,11 +101,11 @@
       />
       <p class="error-msg">Field Cannot Be Blank!</p>
     </div>
-    <div class="submit-cancel-div">
-      <button type="submit" class="btn">Submit</button>
+    <div class="horiz-btn-div">
+      <button type="submit">Submit</button>
       <a
         href="{{ url_for('product_detail', result=item.product_name) }}"
-        class="btn cancel"
+        class="cancel"
       >
         Cancel
       </a>

@@ -19,23 +19,34 @@
       <input type="search" name="search" id="searchInput" class="name-search" />
       <p class="error-msg">Type something, precious!</p>
     </div>
-    <button type="submit" class="btn">Submit</button>
+    <button type="submit">Submit</button>
   </form>
   {% endif %}
 </section>
 {% if query %}
 <section>
-  <h1>Results for {{ query }}</h1>
+  <h1>Results for "{{ query }}"</h1>
   {% if not results %}
   <p>Oops! No results found, try again!</p>
-  {% else %} {% for result in results %} {% if category == "product" %}
-  <a href="{{ url_for('product_detail', result=result.product_name) }}"
-    >{{result.product_name}}</a
-  >
-  {% elif category == "brand" %}
-  <a href="{{ url_for('brand_detail', result=result.brand_name) }}"
-    >{{result.brand_name}}</a
-  >
-  {% endif %} {% endfor %} {% endif %}
+  {% else %}
+  <ul>
+    {% for result in results %} {% if category == "product" %}
+    <li>
+      <span>
+        <a href="{{ url_for('product_detail', result=result.product_name) }}"
+          >{{result.product_name}}
+        </a>
+        - Brand: {{ result.brand.brand_name }}
+      </span>
+    </li>
+    {% elif category == "brand" %}
+    <li>
+      <a href="{{ url_for('brand_detail', result=result.brand_name) }}"
+        >{{result.brand_name}}</a
+      >
+    </li>
+    {% endif %} {% endfor %}
+  </ul>
+  {% endif %}
 </section>
 {% endif %} {% endblock %}

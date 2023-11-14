@@ -16,27 +16,45 @@
   </head>
   <body>
     <main>
-      <nav>
-        <ul>
+      <nav class="mobile-nav">
+        <ul class="nav-ul">
+          <div>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li>
+              <a href="{{ url_for('category_select', activity='browse')}}"
+                >Browse All</a
+              >
+            </li>
+          </div>
+          <div>
+            <li>
+              <a href="{{ url_for('category_select', activity='search')}}"
+                >Search</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('category_select', activity='create')}}"
+                >Create New</a
+              >
+            </li>
+          </div>
+        </ul>
+      </nav>
+      <nav class="desktop-nav">
+        <ul class="nav-ul">
           <li><a href="{{ url_for('index') }}">Home</a></li>
           <li>
-            <a
-              href="{{ url_for('category_select', activity='browse')}}"
-              class="btn nav-btn"
+            <a href="{{ url_for('category_select', activity='browse')}}"
               >Browse All</a
             >
           </li>
           <li>
-            <a
-              href="{{ url_for('category_select', activity='search')}}"
-              class="btn nav-btn"
+            <a href="{{ url_for('category_select', activity='search')}}"
               >Search</a
             >
           </li>
           <li>
-            <a
-              href="{{ url_for('category_select', activity='create')}}"
-              class="btn nav-btn"
+            <a href="{{ url_for('category_select', activity='create')}}"
               >Create New</a
             >
           </li>
