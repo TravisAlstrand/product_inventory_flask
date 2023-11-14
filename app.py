@@ -3,8 +3,10 @@ from os.path import exists
 from modules.models import db, app
 from modules.csv_to_db import add_csv_to_db
 from modules.handle_search import (handle_search, get_single_product, get_single_brand,
-                                   get_brand_product_count, get_all_brands, get_all_products)
+                                   get_brand_product_count, get_all_brands, get_all_products,
+                                   get_products_by_brand)
 from modules.site_to_db import updateBrand, updateProduct, create_new, delete_item
+
 
 # HOME
 @app.route("/")
@@ -16,6 +18,7 @@ def index():
 @app.route("/<activity>/category-select")
 def category_select(activity):
   return render_template("category-select.html", activity=activity)
+
 
 # BROWSE PAGE
 @app.route("/<category>/browse-all")
@@ -67,6 +70,13 @@ def brand_detail(result):
   img_name = brand.brand_name.replace(" ", "-")
   has_img = exists(f"./static/images/brand-logos/{img_name}.jpg")
   return render_template("brand-detail.html", brand=brand, count=count, has_img=has_img, img_name=img_name)
+
+
+# PRODUCTS BY BRAND PAGE
+@app.route("/products-by-<brand>")
+def products_by_brand_page(brand):
+  products = get_products_by_brand(brand)
+  return render_template("prod-by-brand.html", products=products, brand=brand)
 
 
 # EDIT PAGE

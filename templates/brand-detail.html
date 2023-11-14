@@ -10,7 +10,9 @@
   />
   {% endif %}
   <p>{{ brand.brand_description }}</p>
-  <p>Products: {{ count }}</p>
+  <a href="{{ url_for('products_by_brand_page', brand=brand.brand_name) }}"
+    >Products: {{ count }}</a
+  >
   <div class="horiz-btn-div">
     <a
       href="{{ url_for('edit_page', category='brand', item=brand.brand_name)}}"

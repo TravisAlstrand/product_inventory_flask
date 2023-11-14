@@ -1,0 +1,21 @@
+{% extends "layout.html" %} {% block content %}
+<section class="browse-container">
+  <h1>Products by {{brand}}</h1>
+  <div>
+    {% if products %}
+    <ul>
+      {% for product in products %}
+      <li>
+        <a href="{{ url_for('product_detail', result=product.product_name) }}"
+          >{{product.product_name}}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No Products for this brand yet</p>
+    {% endif %}
+  </div>
+  <a href="{{ url_for('brand_detail', result=brand) }}" class="cancel">Back</a>
+</section>
+{% endblock %}

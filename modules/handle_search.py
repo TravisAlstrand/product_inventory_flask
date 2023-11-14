@@ -66,3 +66,14 @@ def get_all_products():
     all_products.append(item)
   all_products.sort(key=lambda x: x.product_name.lower())
   return all_products
+
+
+def get_products_by_brand(brand):
+  brand = get_single_brand(brand)
+  print(brand.brand_name)
+  all_products = []
+  for item in db.session.query(Product).filter(Product.brand_id == brand.brand_id):
+    print(item)
+    all_products.append(item)
+  all_products.sort(key=lambda x: x.product_name.lower())
+  return all_products
